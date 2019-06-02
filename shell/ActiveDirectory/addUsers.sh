@@ -1,9 +1,15 @@
 #!/bin/bash
 
-########################################
-#Script to Add Users in Active Directory##
-#Author - Gulshad Ansari			  ##
-########################################
+#################################################################
+#Script to Add Groups in Active Directory                      ##
+# Script will take inputs from groups.list file                ##
+# Groups wil be added under OU specied in ad.properties file   ##
+# This script does not add any users in groups                 ##
+#                                                     	       ##
+#Author - Gulshad Ansari		                       ##
+#Email: gulshad.ansari@hotmail.com                     	       ##
+#LinkedIn : https://www.linkedin.com/in/gulshad/       	       ##
+#################################################################
 
 LOC=`pwd`
 AD_PROPETIES=ad.properties
@@ -59,4 +65,5 @@ do
 		"Could not add User" $LINE "..."
         fi
 done < $LOC/users.list
+
 

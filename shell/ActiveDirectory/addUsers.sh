@@ -1,10 +1,9 @@
 #!/bin/bash
 
 #################################################################
-#Script to Add Groups in Active Directory                      ##
-# Script will take inputs from groups.list file                ##
-# Groups wil be added under OU specied in ad.properties file   ##
-# This script does not add any users in groups                 ##
+# Script to Add Users in Active Directory                      ##
+# Script will take inputs from users.list file                 ##
+# Users wil be added under OU specied in ad.properties file    ##
 #                                                     	       ##
 #Author - Gulshad Ansari		                       ##
 #Email: gulshad.ansari@hotmail.com                     	       ##
@@ -22,7 +21,7 @@ LASTNAME="$2"
 
 # Create User LDIF File
 cat > /tmp/$FIRSTNAME.ldif <<EOFILE
-dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
+dn: CN=$FIRSTNAME $LASTNAME,${ARG_USER_BASE}
 changetype: add
 objectClass: top
 objectClass: person
@@ -38,12 +37,12 @@ userAccountControl: 514
 sAMAccountName: $FIRSTNAME$LASTNAME
 userPrincipalName: $FIRSTNAME$LASTNAME@${ARG_DOMAIN}
 
-dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
+dn: CN=$FIRSTNAME $LASTNAME,${ARG_USER_BASE}
 changetype: modify
 replace: unicodePwd
 unicodePwd::${ARG_NewUserPass}
 
-dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
+dn: CN=$FIRSTNAME $LASTNAME,${ARG_USER_BASE}
 changetype: modify
 replace: userAccountControl
 userAccountControl: 512
@@ -62,7 +61,7 @@ do
         if [ $? -eq 0 ]; then
                 echo "User" $LINE "Added Successfully"
 	else
-		"Could not add User" $LINE "..."
+		echo "Could not add User" $LINE "..."
         fi
 done < $LOC/users.list
 

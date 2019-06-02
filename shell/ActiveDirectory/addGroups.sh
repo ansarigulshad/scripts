@@ -14,8 +14,12 @@
 LOC=`pwd`
 AD_PROPETIES=ad.properties
 source $LOC/$AD_PROPETIES
-
 gidCounter=665
+
+currect_time_stamp()
+{
+        echo "`date +%Y-%m-%d" "%H:%M:%S`"
+}
 
 create_ad_groups()
 {
@@ -35,6 +39,7 @@ sAMAccountName: $GROUPNAME
 gidNumber: $gidCounter
 EOFILE
 
+echo -e "\n`currect_time_stamp` " >> addgroups.out
 # Add group in OU $ARG_GROUP_BASE
 LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$GROUPNAME.ldif -w "${ARG_USERPSWD}" | tee -a addgroups.out
 

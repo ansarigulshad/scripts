@@ -26,6 +26,7 @@ changetype: modify
 add: member
 member: CN=Gulshad Ansari,$ARG_USER_BASE
 member: CN=Adnan Khan,$ARG_USER_BASE
+member: CN=Amir Shaikh,$ARG_USER_BASE
 EOFILE
 done
 

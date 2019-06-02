@@ -56,7 +56,7 @@ EOFILE
 echo -e "\n`currect_time_stamp` " >> addusers.out
 
 # Add User
-LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$FIRSTNAME.ldif -w "${ARG_USERPSWD}" | tee -a addusers.out
+LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$FIRSTNAME.ldif -w "${ARG_USERPSWD}" 
 
 }
 
@@ -64,7 +64,7 @@ LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /t
 while read LINE
 do
         echo "Creating user: " $LINE
-        create_ad_users $LINE
+        create_ad_users $LINE | tee -a addusers.out
         if [ $? -eq 0 ]; then
                 echo "User" $LINE "Added Successfully"
 	else

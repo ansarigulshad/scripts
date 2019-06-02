@@ -53,7 +53,7 @@ do
         if [ $? -eq 0 ]; then
                 echo "Group" $LINE "Added Successfully"
 	else
-		echo "Could not add Group " $LINE "...\n"
+		echo "Could not add Group " $LINE "..."
         fi
 done < $LOC/groups.list
 

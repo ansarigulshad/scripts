@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ########################################
-#Script to setup and configure MIT KDC##
+#Script to Add Users in Active Directory##
 #Author - Gulshad Ansari			  ##
 ########################################
 
@@ -10,45 +10,51 @@ AD_PROPETIES=ad.properties
 source $LOC/$AD_PROPETIES
 
 
-creat_ad_users()
+create_ad_users()
 {
-  FIRSTNAME="$1"
-  LASTNAME="$2"
+FIRSTNAME="$1"
+LASTNAME="$2"
 
-  cat > /tmp/$FIRSTNAME.ldif <<EOFILE
-  dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
-  changetype: add
-  objectClass: top
-  objectClass: person
-  objectClass: organizationalPerson
-  objectClass: user
-  cn: $FIRSTNAME $LASTNAME
-  sn: $FIRSTNAME$LASTNAME
-  givenName: $FIRSTNAME
-  displayName: $FIRSTNAME $LASTNAME
-  name: $FIRSTNAME $LASTNAME
-  accountExpires: 9223372036854775807
-  userAccountControl: 514
-  sAMAccountName: $FIRSTNAME$LASTNAME
-  userPrincipalName: $FIRSTNAME$LASTNAME@${ARG_DOMAIN}
+cat > /tmp/$FIRSTNAME.ldif <<EOFILE
+dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
+changetype: add
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: user
+cn: $FIRSTNAME $LASTNAME
+sn: $FIRSTNAME$LASTNAME
+givenName: $FIRSTNAME
+displayName: $FIRSTNAME $LASTNAME
+name: $FIRSTNAME $LASTNAME
+accountExpires: 9223372036854775807
+userAccountControl: 514
+sAMAccountName: $FIRSTNAME$LASTNAME
+userPrincipalName: $FIRSTNAME$LASTNAME@${ARG_DOMAIN}
 
-  dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
-  changetype: modify
-  replace: unicodePwd
-  unicodePwd::${ARG_NewUserPass}
+dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
+changetype: modify
+replace: unicodePwd
+unicodePwd::${ARG_NewUserPass}
 
-  dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
-  changetype: modify
-  replace: userAccountControl
-  userAccountControl: 512
-  EOFILE
+dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
+changetype: modify
+replace: userAccountControl
+userAccountControl: 512
+EOFILE
+
+LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$FIRSTNAME.ldif -w "${ARG_USERPSWD}"
+
 }
 
 
 while read LINE
 do
-  echo "Creating user: " $LINE
-	create_users $LINE
+	echo "Creating user: " $LINE
+	create_ad_users $LINE
+	if [ $? -eq 0]; then
+		echo "User" $LINE "Added Successfully"
+	fi
 done < $LOC/users.list
 
 

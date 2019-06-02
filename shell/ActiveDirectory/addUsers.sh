@@ -49,7 +49,7 @@ userAccountControl: 512
 EOFILE
 
 # Add User
-LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$FIRSTNAME.ldif -w "${ARG_USERPSWD}"
+LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$FIRSTNAME.ldif -w "${ARG_USERPSWD}" | tee -a addusers.out
 
 }
 
@@ -61,7 +61,7 @@ do
         if [ $? -eq 0 ]; then
                 echo "User" $LINE "Added Successfully"
 	else
-		echo "Could not add User" $LINE "..."
+		echo "Could not add User" $LINE "...\n"
         fi
 done < $LOC/users.list
 

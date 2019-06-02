@@ -1,17 +1,19 @@
 #!/bin/bash
 
 
-###############################################################
-# Setup Prerequisites for Hadoop Cluster - DABSTERInc		  #
-# This script is tested on RHEL/CentOs 7					  #
-#															  #
-# This script will perform below pre-req		  			  #	
-# 1) Disable Firewall		  								  #	
-# 2) Install and Start NTP		  							  #
-# 3) Disable SELinux 		  								  #
-# 4) Set Swappiness to 10		  							  #
-# 5) Enable THP		  										  #
-###############################################################
+#==============================================================
+# Set Prerequisites for Hadoop Cluster
+#==============================================================
+# This script is tested on RHEL/CentOs 7					
+#					
+# This script will perform below pre-req
+# 1) Disable Firewall
+# 2) Install and Start NTP
+# 3) Disable SELinux 
+# 4) Set Swappiness to 10
+# 5) Enable THP
+#
+# Some usefull pre-req checks by Clodera : https://github.com/cloudera-ps/prereq-checks
 
 
 # Run this script with root user

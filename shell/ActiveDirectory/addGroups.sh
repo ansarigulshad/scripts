@@ -6,7 +6,7 @@
 # Groups wil be added under OU specied in ad.properties file   ##
 # This script does not add any users in groups                 ##
 #                                                     	       ##
-#Author - Gulshad Ansari		                         	         ##
+#Author - Gulshad Ansari		       	               ##
 #Email: gulshad.ansari@hotmail.com                     	       ##
 #LinkedIn : https://www.linkedin.com/in/gulshad/       	       ##
 #################################################################
@@ -15,54 +15,40 @@ LOC=`pwd`
 AD_PROPETIES=ad.properties
 source $LOC/$AD_PROPETIES
 
-create_ad_users()
+gidCounter=665
+
+create_ad_groups()
 {
-FIRSTNAME="$1"
-LASTNAME="$2"
+GROUPNAME="$1"
+gidCounter=$((gidCounter+1))
 
-# Create User LDIF File
-cat > /tmp/$FIRSTNAME.ldif <<EOFILE
-dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
-changetype: add
+# Create Group LDIF File
+cat > /tmp/$GROUPNAME.ldif <<EOFILE
+dn: CN=$GROUPNAME,$ARG_GROUP_BASE
 objectClass: top
-objectClass: person
-objectClass: organizationalPerson
-objectClass: user
-cn: $FIRSTNAME $LASTNAME
-sn: $FIRSTNAME$LASTNAME
-givenName: $FIRSTNAME
-displayName: $FIRSTNAME $LASTNAME
-name: $FIRSTNAME $LASTNAME
-accountExpires: 9223372036854775807
-userAccountControl: 514
-sAMAccountName: $FIRSTNAME$LASTNAME
-userPrincipalName: $FIRSTNAME$LASTNAME@${ARG_DOMAIN}
-
-dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
-changetype: modify
-replace: unicodePwd
-unicodePwd::${ARG_NewUserPass}
-
-dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
-changetype: modify
-replace: userAccountControl
-userAccountControl: 512
+objectClass: group
+cn: $GROUPNAME
+name: $GROUPNAME
+distinguishedName: CN=$GROUPNAME,$ARG_GROUP_BASE
+instanceType: 4
+sAMAccountName: $GROUPNAME
+gidNumber: $gidCounter
 EOFILE
 
-# Add User
-LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$FIRSTNAME.ldif -w "${ARG_USERPSWD}"
+# Add group in OU $ARG_GROUP_BASE
+LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$GROUPNAME.ldif -w "${ARG_USERPSWD}"
 
 }
 
 
 while read LINE
 do
-        echo "Creating user: " $LINE
-        create_ad_users $LINE
+        echo "Creating Groups: " $LINE
+        create_ad_groups $LINE
         if [ $? -eq 0 ]; then
-                echo "User" $LINE "Added Successfully"
+                echo "Group" $LINE "Added Successfully"
 	else
-		"Could not add User" $LINE "..."
+		echo "Could not add Group " $LINE "..."
         fi
-done < $LOC/users.list
+done < $LOC/groups.list
 

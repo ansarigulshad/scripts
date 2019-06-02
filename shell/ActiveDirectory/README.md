@@ -11,6 +11,7 @@
 ```
 ## 2. Update ad.properties file as per your AD environment details
 
+
 ## 3. Add users
 ####  3.1. Add users in users.list file
 ####  3.2. Execute addUsers.sh

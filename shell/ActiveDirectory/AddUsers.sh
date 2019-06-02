@@ -9,12 +9,12 @@ LOC=`pwd`
 AD_PROPETIES=ad.properties
 source $LOC/$AD_PROPETIES
 
-
 create_ad_users()
 {
 FIRSTNAME="$1"
 LASTNAME="$2"
 
+# Create User LDIF File
 cat > /tmp/$FIRSTNAME.ldif <<EOFILE
 dn: CN=$FIRSTNAME $LASTNAME,${ARG_SEARCHBASE}
 changetype: add
@@ -43,6 +43,7 @@ replace: userAccountControl
 userAccountControl: 512
 EOFILE
 
+# Add User
 LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$FIRSTNAME.ldif -w "${ARG_USERPSWD}"
 
 }
@@ -50,17 +51,12 @@ LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /t
 
 while read LINE
 do
-	echo "Creating user: " $LINE
-	create_ad_users $LINE
-	if [ $? -eq 0]; then
-		echo "User" $LINE "Added Successfully"
-	fi
+        echo "Creating user: " $LINE
+        create_ad_users $LINE
+        if [ $? -eq 0 ]; then
+                echo "User" $LINE "Added Successfully"
+	else
+		"Could not add User" $LINE "..."
+        fi
 done < $LOC/users.list
-
-
-
-
-
-
-
 

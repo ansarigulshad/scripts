@@ -21,7 +21,7 @@ for thisgroup in `cat groups.list`
 do 
 # touch groupmembers/$thisgroup"-members".list
 cat > groupmembers/$thisgroup"-members".ldif <<EOFILE
-dn: CN=$GROUPNAME,$ARG_GROUP_BASE
+dn: CN=$thisgroup,$ARG_GROUP_BASE
 changetype: modify
 add: member
 member: CN=Gulshad Ansari,$ARG_USER_BASE

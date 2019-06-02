@@ -28,12 +28,13 @@ $ ./addGroups.sh
 #### This is 2 part script
 #### 5.1. Create ldif files for each group membership
 ```
-$ addUsersToGroup-Part1-CreateGroupMembershipfiles.sh
+$ ./addUsersToGroup-Part1-CreateGroupMembershipfiles.sh
 ```
 _This script will create groupmembershif ldif file under `groupmembers` directory
 _kindly add appropriate members in each ldif file before executing Part-II script
 
 #### 5.2. Execute `ldapadd` command to update user group membership and add users to group
 ```
+$ ./addUsersToGroups-Part-II-AddUsersinGroup.sh
 ```
 #### 

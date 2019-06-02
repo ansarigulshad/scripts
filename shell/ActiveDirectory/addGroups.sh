@@ -41,7 +41,7 @@ EOFILE
 
 echo -e "\n`currect_time_stamp` " >> addgroups.out
 # Add group in OU $ARG_GROUP_BASE
-LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$GROUPNAME.ldif -w "${ARG_USERPSWD}" | tee -a addgroups.out
+LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$GROUPNAME.ldif -w "${ARG_USERPSWD}" 
 
 }
 
@@ -49,7 +49,7 @@ LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /t
 while read LINE
 do
         echo "Creating Groups: " $LINE
-        create_ad_groups $LINE
+        create_ad_groups $LINE | tee -a addgroups.out
         if [ $? -eq 0 ]; then
                 echo "Group" $LINE "Added Successfully"
 	else

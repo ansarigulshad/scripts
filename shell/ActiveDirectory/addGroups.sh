@@ -36,7 +36,7 @@ gidNumber: $gidCounter
 EOFILE
 
 # Add group in OU $ARG_GROUP_BASE
-LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$GROUPNAME.ldif -w "${ARG_USERPSWD}"
+LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$GROUPNAME.ldif -w "${ARG_USERPSWD}" | tee -a addgroups.out
 
 }
 
@@ -48,7 +48,7 @@ do
         if [ $? -eq 0 ]; then
                 echo "Group" $LINE "Added Successfully"
 	else
-		echo "Could not add Group " $LINE "..."
+		echo "Could not add Group " $LINE "...\n"
         fi
 done < $LOC/groups.list
 

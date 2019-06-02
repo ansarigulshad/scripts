@@ -1,4 +1,4 @@
-# Add Users and groups in Active Directory
+# Add Users and groups in Active Directory using shell script
 
 ## 1. Download script
 ```

@@ -68,7 +68,7 @@ do
         if [ $? -eq 0 ]; then
                 echo "User" $LINE "Added Successfully"
 	else
-		echo "Could not add User" $LINE "...\n"
+		echo "Could not add User" $LINE "..."
         fi
 done < $LOC/users.list
 

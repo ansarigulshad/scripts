@@ -14,6 +14,11 @@ LOC=`pwd`
 AD_PROPETIES=ad.properties
 source $LOC/$AD_PROPETIES
 
+currect_time_stamp()
+{
+        echo "`date +%Y-%m-%d" "%H:%M:%S`"
+}
+
 create_ad_users()
 {
 FIRSTNAME="$1"
@@ -47,6 +52,8 @@ changetype: modify
 replace: userAccountControl
 userAccountControl: 512
 EOFILE
+
+echo -e "\n`currect_time_stamp` " >> addusers.out
 
 # Add User
 LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$FIRSTNAME.ldif -w "${ARG_USERPSWD}" | tee -a addusers.out

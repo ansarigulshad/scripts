@@ -11,7 +11,29 @@
 ```
 ## 2. Update ad.properties file as per your AD environment details
 
-## 3. Execute addUsers.sh & addGroups.sh scripts to add users and groups
+## 3. Add users
+####  3.1. Add users in users.list file
+####  3.2. Execute addUsers.sh
+```
+$ ./addUsers.sh
+```
 
+## 4. Add Groups
+####  3.1. Add groups in groups.list file
+####  3.2. Execute addGroups.sh
+```
+$ ./addGroups.sh
+```
+## 5. Add Users to Group
+#### This is 2 part script
+#### 5.1. Create ldif files for each group membership
+```
+$ addUsersToGroup-Part1-CreateGroupMembershipfiles.sh
+```
+_This script will create groupmembershif ldif file under `groupmembers` directory
+_kindly add appropriate members in each ldif file before executing Part-II script
 
-
+#### 5.2. Execute `ldapadd` command to update user group membership and add users to group
+```
+```
+#### 

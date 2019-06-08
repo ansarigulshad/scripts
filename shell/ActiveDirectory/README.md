@@ -20,8 +20,8 @@ $ ./addUsers.sh
 ```
 
 ## 4. Add Groups
-####  3.1. Add groups in groups.list file
-####  3.2. Execute addGroups.sh
+####  4.1. Add groups in groups.list file
+####  4.2. Execute addGroups.sh
 ```
 $ ./addGroups.sh
 ```

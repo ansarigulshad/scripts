@@ -24,13 +24,14 @@ setup_kdc()
 	#Configure Kerberos
 	echo -e "\n`currect_time_stamp` Configuring Kerberos"
 	echo -e "\n`currect_time_stamp` Configuring krb5.conf"
-	sed -i.bak "s/EXAMPLE.COM/$REALM/g" $LOC/krb5.conf.template
-	sed -i.bak "s/kerberos.example.com/$KDC_HOST/g" $LOC/krb5.conf.template
+	sed -i.bkp "s/EXAMPLE.COM/$REALM/g" $LOC/krb5.conf.template
+	sed -i.bkp "s/kerberos.example.com/$KDC_HOST/g" $LOC/krb5.conf.template
 	cat $LOC/krb5.conf.template > /etc/krb5.conf
 	echo -e "\n`currect_time_stamp` Configuring kdc.conf"
-	sed -i.bak "s/EXAMPLE.COM/$REALM/g" /var/kerberos/krb5kdc/kdc.conf	
+	sed -i.bkp "s/EXAMPLE.COM/$REALM/g" /var/kerberos/krb5kdc/kdc.conf
+	sed -i.bkp'/{/a max_renewable_life = 7d 0h 0m 0s'  /var/kerberos/krb5kdc/kdc.conf
 	echo -e "\n`currect_time_stamp` Configuring kadm5.acl"
-	sed -i.bak "s/EXAMPLE.COM/$REALM/g" /var/kerberos/krb5kdc/kadm5.acl
+	sed -i.bkp "s/EXAMPLE.COM/$REALM/g" /var/kerberos/krb5kdc/kadm5.acl
 
 	#Create Database
 	echo -e "\n`currect_time_stamp` Creating kerberos database"

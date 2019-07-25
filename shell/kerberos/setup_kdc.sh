@@ -36,7 +36,7 @@ setup_kdc()
 
 	#Create Database
 	echo -e "\n`currect_time_stamp` Creating kerberos database"
-	kdb5_util create -s -P $KRB_MASTER_SECRET
+	kdb5_util create -s -P $KRB_MASTER_SECRET -r $REALM
 
 	#Start Services
 	echo -e "\n`currect_time_stamp` Starting KDC services"

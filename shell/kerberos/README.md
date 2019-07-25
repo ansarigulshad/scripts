@@ -14,7 +14,7 @@ $ yum install git -y
 $ git clone https://github.com/ansarigulshad/scripts.git
 $ cd scripts/shell/kerberos/;chmod +x *.sh
 ```
-## 3. Edit krb.properties file and modify values as per your requirements
+## 3. Edit `krb.properties` file and modify values as per your requirements
 
 ## 4. Execute `setup_kdc.sh` to setup kdc server automatically
 ```

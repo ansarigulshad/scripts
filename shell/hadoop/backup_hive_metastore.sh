@@ -8,7 +8,7 @@
 #
 #
 #email="username@example.com"
-metaStoreHost=mysqldserver.example.com
+metastoreHost=mysqldserver.example.com
 tsNow=$(date "+%F-%H")
 tsLast=$(date "+%F-%H" --date='1 hour ago')
 targetDir=/backup/hadoop/hive
@@ -33,7 +33,7 @@ function removeOldSnapshots () {
 }
 
 function getSnapshot () {
-   mysqldump -C -h $metaStoreHost  -u $user -p$pass $dbName | gzip > $snapNow
+   mysqldump -C -h $metastoreHost  -u $user -p$pass $dbName | gzip > $snapNow
 #   echo "Hive metastore backup completed succesfully"
 }
 

@@ -14,7 +14,6 @@ tsLast=$(date "+%F-%H" --date='1 hour ago')
 targetDir=/backup/hadoop/hive
 snapNow=$targetDir/hiveMetastore-backup-$tsNow.sql.gz
 snapLast=$targetDir/hiveMetastore-backup-$tsLast.sql.gz
-snapSizeThresh=3
 user=user
 pass=password
 dbName=hive

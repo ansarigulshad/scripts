@@ -30,7 +30,7 @@ $ kinit admin/admin
 
 #### 6. Execute setup_ambari_krb.sh to enable kerberos on HDP cluster through ambari REST API.
 
-___Make sure all services are up and running, you can run service check to verify the same___
+___IMPORTANT: Make sure all services are up and running, you can run service check to verify the same___
 ```
 $ sh setup_ambari_krb.sh
 ```

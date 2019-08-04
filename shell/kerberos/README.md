@@ -10,6 +10,7 @@ Before executing __`setup_ambari_krb.sh`__ script, make sure all hadoop service 
 
 ## 2. Download the script
 ```
+$ yum clean all
 $ yum install git -y
 $ git clone https://github.com/ansarigulshad/scripts.git
 $ cd scripts/shell/kerberos/;chmod +x *.sh

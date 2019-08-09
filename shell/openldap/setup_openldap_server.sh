@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# Script to Add Users in Active Directory                      ##
+# Script to setup openLDAP server on centos/RHEL server        ##
 # Script will take inputs from users.list file                 ##
 # Users wil be added under OU specied in ad.properties file    ##
 #                                                     	       ##

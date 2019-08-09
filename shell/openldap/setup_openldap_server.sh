@@ -1,5 +1,15 @@
 #!/bin/bash
 
+#################################################################
+# Script to Add Users in Active Directory                      ##
+# Script will take inputs from users.list file                 ##
+# Users wil be added under OU specied in ad.properties file    ##
+#                                                     	       ##
+#Author - Gulshad Ansari		                       ##
+#Email: gulshad.ansari@hotmail.com                     	       ##
+#LinkedIn : https://www.linkedin.com/in/gulshad/       	       ##
+#################################################################
+
 
 #LdapAdmin=ldapadmin
 #LdapAdminPassword="hadoop123"
@@ -7,7 +17,11 @@
 #BaseDomain="dc=hortonworks,dc=com"
 #LdapAdminDN="cn=$LdapAdmin,$BaseDomain"
 
-source openldap.properties
+
+LOC=`pwd`
+OPENLDAP_PROPETIES=openldap.properties
+source $LOC/$OPENLDAP_PROPETIES
+
 
 yum -y install openldap-servers openldap-clients
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG

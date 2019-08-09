@@ -5,7 +5,7 @@
 ```
 yum install git -y
 git clone https://github.com/ansarigulshad/scripts.git
-cd to scripts/shell/ActiveDirectory/
+cd to scripts/shell/openldap/
 chmod +x *.sh
 ```
 
@@ -24,4 +24,9 @@ LdapAdminDN="cn=$LdapAdmin,$BaseDomain"
 
 ```
 sh setup_openldap_server.sh
+```
+
+#### 4. Validate (optional)
+```
+# ldapsearch -x -H ldap://$(hostname -f):389 -D 'cn=ldapadmin,dc=hortonworks,dc=com' -w 'hadoop123' -b 'dc=hortonworks,dc=com'
 ```

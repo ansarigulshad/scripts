@@ -5,7 +5,7 @@
 ```
 yum install git -y
 git clone https://github.com/ansarigulshad/scripts.git
-cd to scripts/shell/openldap/
+cd scripts/shell/openldap/
 chmod +x *.sh
 ```
 

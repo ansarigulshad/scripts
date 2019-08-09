@@ -1,6 +1,14 @@
 #!/bin/bash
 
 
+#LdapAdmin=ldapadmin
+#LdapAdminPassword="hadoop123"
+#MyPass=`slappasswd -s $LdapAdminPassword`
+#BaseDomain="dc=hortonworks,dc=com"
+#LdapAdminDN="cn=$LdapAdmin,$BaseDomain"
+
+source openldap.properties
+
 yum -y install openldap-servers openldap-clients
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
 chown ldap. /var/lib/ldap/DB_CONFIG
@@ -8,13 +16,6 @@ systemctl start slapd
 systemctl enable slapd
 
 netstat -antup | grep -i 389
-
-
-LdapAdmin=ldapadmin
-LdapAdminPassword="hadoop123"
-MyPass=`slappasswd -s $LdapAdminPassword`
-BaseDomain="dc=hortonworks,dc=com"
-LdapAdminDN="cn=$LdapAdmin,$BaseDomain"
 
 
 echo -e "dn: olcDatabase={0}config,cn=config\n\nchangetype: modify\nadd: olcRootPW\nolcRootPW: $MyPass"  > /var/tmp/chrootpw.ldif

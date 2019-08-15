@@ -15,6 +15,7 @@ myCity[11]="Hydrabad"
 
 rand=$[$RANDOM % ${#myCity[@]}]
 
+echo -e "Data is beeing generated!!!!!"
 
 for (( i=1; i<=5000000; i++ ))
 do

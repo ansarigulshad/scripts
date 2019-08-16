@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 sample_data_file=sample_user_data.csv
+number_of_records=100
 
 myCity[0]="Delhi"
 myCity[1]="Pune"
@@ -17,7 +18,7 @@ myCity[11]="Hydrabad"
 
 echo "Sample data is being generated!!!"
 
-for (( i=1; i<=100; i++ ))
+for (( i=1; i<=$number_of_records; i++ ))
 do
   rand=$[$RANDOM % ${#myCity[@]}]
   echo $i",user"$i","${myCity[$rand]}

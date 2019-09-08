@@ -38,8 +38,38 @@ ldapadd -Y EXTERNAL -H ldapi:/// -f /etc/openldap/schema/inetorgperson.ldif
 ARG_MyPass=`slappasswd -s $ARG_L_ADMINPASSWORD`
 
 
-echo -e "dn: olcDatabase={1}monitor,cn=config\nchangetype: modify\nreplace: olcAccess\nolcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"\n  read by dn.base="$ARG_BINDDN" read by * none\n\ndn: olcDatabase={2}hdb,cn=config\nchangetype: modify\nreplace: olcSuffix\nolcSuffix: $ARG_DOMAINCONTROLLER\n\ndn: olcDatabase={2}hdb,cn=config\nchangetype: modify\nreplace: olcRootDN\nolcRootDN: $ARG_BINDDN\n\ndn: olcDatabase={2}hdb,cn=config\nchangetype: modify\nadd: olcRootPW\nolcRootPW: $ARG_MyPass\n\ndn: olcDatabase={2}hdb,cn=config\nchangetype: modify\nadd: olcAccess\nolcAccess: {0}to attrs=userPassword,shadowLastChange by\n dn="$ARG_BINDDN" write by anonymous auth by self write by * none\nolcAccess: {1}to dn.base="" by * read\nolcAccess: {2}to * by dn="$ARG_BINDDN" write by * read\n" > /var/tmp/chdomain.ldif
+#echo -e "dn: olcDatabase={1}monitor,cn=config\nchangetype: modify\nreplace: olcAccess\nolcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"\n  read by dn.base="$ARG_BINDDN" read by * none\n\ndn: olcDatabase={2}hdb,cn=config\nchangetype: modify\nreplace: olcSuffix\nolcSuffix: $ARG_DOMAINCONTROLLER\n\ndn: olcDatabase={2}hdb,cn=config\nchangetype: modify\nreplace: olcRootDN\nolcRootDN: $ARG_BINDDN\n\ndn: olcDatabase={2}hdb,cn=config\nchangetype: modify\nadd: olcRootPW\nolcRootPW: $ARG_MyPass\n\ndn: olcDatabase={2}hdb,cn=config\nchangetype: modify\nadd: olcAccess\nolcAccess: {0}to attrs=userPassword,shadowLastChange by\n dn="$ARG_BINDDN" write by anonymous auth by self write by * none\nolcAccess: {1}to dn.base="" by * read\nolcAccess: {2}to * by dn="$ARG_BINDDN" write by * read\n" > /var/tmp/chdomain.ldif
 
+cat > /var/tmp/chdomain.ldif <<EOFILE
+dn: olcDatabase={1}monitor,cn=config
+changetype: modify
+replace: olcAccess
+olcAccess: {0}to * by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth"
+  read by dn.base="$ARG_BINDDN" read by * none
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+replace: olcSuffix
+olcSuffix: $ARG_DOMAINCONTROLLER
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+replace: olcRootDN
+olcRootDN: $ARG_BINDDN
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+add: olcRootPW
+olcRootPW: $ARG_MyPass
+
+dn: olcDatabase={2}hdb,cn=config
+changetype: modify
+add: olcAccess
+olcAccess: {0}to attrs=userPassword,shadowLastChange by
+ dn="$ARG_BINDDN" write by anonymous auth by self write by * none
+olcAccess: {1}to dn.base="" by * read
+olcAccess: {2}to * by dn="$ARG_BINDDN" write by * read" 
+EOFILE
 
 ldapmodify -Y EXTERNAL -H ldapi:/// -f /var/tmp/chdomain.ldif
 

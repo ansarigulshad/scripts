@@ -52,6 +52,23 @@ echo -e "\ndn: $ARG_DOMAINCONTROLLER\nobjectClass: top\nobjectClass: dcObject\no
 ldapadd -x -D $ARG_BINDDN -w $ARG_L_ADMINPASSWORD -f /var/tmp/ARG_DOMAINCONTROLLER.ldif
 
 
-
-
 # done
+
+
+echo -e "\n\nSetup Completed Successfully:\n"
+
+echo -e "=================="
+echo -e "LDAP Attributes"
+echo -e "=================="
+
+echo -e "LDAP Server Host = $LDAP_HOST"
+echo -e "LDAP Server port = $LDAP_PORT"
+echo -e "User Object Class = posixAccount"
+echo -e "Username Attribute = uid"
+echo -e "Group Object Class = posixGroup"
+echo -e "Group Name Attribute = cn"
+echo -e "Group Member Attribute = memberUid"
+echo -e "Distinguished name attribute = dn"
+echo -e "Search Base DN = $ARG_DOMAINCONTROLLER"
+echo -e "managerDn = $ARG_BINDDN"
+echo -e "managerDnPassword = $ARG_L_ADMINPASSWORD"

@@ -1,10 +1,10 @@
 #!/bin/#!/usr/bin/env bash
 
 #################################################################
-# Script to Add Users in Active Directory                      ##
+# Script to Add groups in openldap Directory                   ##
 # Script will take inputs from users.list file.                ##
-# Make sure groups.list file is available in same location      ##
-# Users wil be added under OU specied in openlap.properties    ##
+# Make sure groups.list file is available in same location     ##
+# Groups wil be added under OU specied in openlap.properties    ##
 #                                                     	       ##
 #Author - Gulshad Ansari		                       ##
 #Email: gulshad.ansari@hotmail.com                     	       ##

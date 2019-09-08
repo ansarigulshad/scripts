@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #################################################################
-# Script to Add Users in Active Directory                      ##
+# Script to Add Users in openldap .                            ##
 # Script will take inputs from users.list file.                ##
 # Make sure users.list file is available in same location      ##
 # Users wil be added under OU specied in openlap.properties    ##

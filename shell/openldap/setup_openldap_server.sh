@@ -25,7 +25,7 @@ source $LOC/$OPENLDAP_PROPETIES
 netstat -antup | grep -i 389
 
 
-echo -e "dn: olcDatabase={0}config,cn=config\n\nchangetype: modify\nadd: olcRootPW\nolcRootPW: $ARG_MyPass"  > /var/tmp/chrootpw.ldif
+echo -e "dn: olcDatabase={0}config,cn=config\nchangetype: modify\nadd: olcRootPW\nolcRootPW: $ARG_MyPass"  > /var/tmp/chrootpw.ldif
 
 
 ldapadd -Y EXTERNAL -H ldapi:/// -f /var/tmp/chrootpw.ldif

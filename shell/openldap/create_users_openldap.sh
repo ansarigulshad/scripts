@@ -56,7 +56,7 @@ echo -e "\n`currect_time_stamp` " >> addusers.out
 LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /tmp/$UNAME.ldif -w "${ARG_L_ADMINPASSWORD}"
 
 # Create default password (Welcome123)
-ldappasswd -s "${ARG_NewUserPass}" -D "${ARG_BINDDN}" -x "uid=$UNAME,${ARG_USER_BASE}" -w "${ARG_L_ADMINPASSWORD}"
+ldappasswd -s "${ARG_UserPass}" -D "${ARG_BINDDN}" -x "uid=$UNAME,${ARG_USER_BASE}" -w "${ARG_L_ADMINPASSWORD}"
 
 }
 

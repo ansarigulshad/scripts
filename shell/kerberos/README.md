@@ -25,7 +25,7 @@ $ sh setup_kdc.sh
 #### 5. After Successfull KDC setup, Verify whether you are able to do kinit with admin/admin principal (default password is :hadoop)
 
 ```
-$ kinit admin/admin
+$ echo "hadoop" | kinit admin/admin
 ```
 
 #### 6. Execute setup_ambari_krb.sh to enable kerberos on HDP cluster through ambari REST API.

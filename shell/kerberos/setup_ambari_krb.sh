@@ -107,13 +107,13 @@ configure_kerberos()
 
 	#Install Kerberos Service & components
 	echo -e "\n`currect_time_stamp` Installing the KERBEROS service and components"
-	curl -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d '{"ServiceInfo": {"state" : "INSTALLED"}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER_NAME/services/KERBEROS
+	curl -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d '{"RequestInfo":{"context":"Install kerberos_client : Gulshad"},"Body":{"ServiceInfo": {"state" : "INSTALLED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER_NAME/services/KERBEROS
 	echo -e "\n`currect_time_stamp` Sleeping for 1 minute"
 	sleep 60
 
 	#Stop All Services & Enable Kerberos
 	echo -e "\n`currect_time_stamp` Stopping all the services"
-	curl -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d '{"RequestInfo":{"context":"Stop all services-Dabster"},"Body":{"ServiceInfo": {"state" : "INSTALLED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER_NAME/services
+	curl -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d '{"RequestInfo":{"context":"Stop all services : Gulshad"},"Body":{"ServiceInfo": {"state" : "INSTALLED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER_NAME/services
     echo -e "\n`currect_time_stamp` Sleeping for 3 minutes"
 	sleep 180
 	if [[ "${AMBARI_VERSION:0:3}" > "2.7" ]] || [[ "${AMBARI_VERSION:0:3}" == "2.7" ]]
@@ -129,7 +129,7 @@ configure_kerberos()
 	#Start All Services
 	echo -e "\n`currect_time_stamp` Starting all services after 2 minutes..Please be patient :)"
 	sleep 120
-	curl -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d '{"RequestInfo":{"context":"Start all services-Dabster"},"Body":{"ServiceInfo": {"state" : "STARTED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER_NAME/services
+	curl -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X PUT -d '{"RequestInfo":{"context":"Start all services : Gulshad"},"Body":{"ServiceInfo": {"state" : "STARTED"}}}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER_NAME/services
 	echo -e "\n`currect_time_stamp` Please check Ambari UI\nThank You! :)"
 }
 

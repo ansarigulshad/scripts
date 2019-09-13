@@ -1,9 +1,9 @@
 #!/bin/bash
 
-########################################
-#Script to setup and configure MIT KDC##
-#Author - Gulshad Ansari			  ##
-########################################
+################################################################################
+#Script to Enable kerberos on HDP Cluster using Ambari APIs
+#Author - Gulshad Ansari			  
+################################################################################
 
 LOC=`pwd`
 KRB_PROPERTIES=krb.properties

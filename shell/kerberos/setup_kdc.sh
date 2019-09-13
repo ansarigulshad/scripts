@@ -19,6 +19,7 @@ setup_kdc()
 {
 	#Install Kerberos packages
 	echo -e "\n`currect_time_stamp` Installing kerberos RPMs"
+	yum clean all
 	yum -y install krb5-server krb5-libs krb5-workstation
 
 	#Configure Kerberos

@@ -99,7 +99,8 @@ configure_kerberos()
 
 	#Add Kerberos client component to each host
 	echo -e "\n `currect_time_stamp` Creating the KERBEROS_CLIENT host components for each host"
-		for client in `echo $KERBEROS_CLIENTS|tr ',' ' '`;
+	#	for client in `echo $KERBEROS_CLIENTS|tr ',' ' '`;
+		for client in `echo $KERBEROS_CLIENTS`;
 		do
 			curl -H "X-Requested-By:ambari" -u $AMBARI_ADMIN_USER:$AMBARI_ADMIN_PASSWORD -i -X POST -d '{"host_components" : [{"HostRoles" : {"component_name":"KERBEROS_CLIENT"}}]}' http://$AMBARI_HOST:8080/api/v1/clusters/$CLUSTER_NAME/hosts?Hosts/host_name=$client
 			sleep 1

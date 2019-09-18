@@ -38,7 +38,12 @@ sh create_users_openldap.sh
 ```
 sh create_groups_openldap.sh
 ```
-#### 6. Validate (optional)
+#### 6. Add users to groups
+```
+sh add_users_to_groups.sh
+```
+
+#### 7. Validate
 ```
 # ldapsearch -x -H ldap://$(hostname -f):389 -D 'cn=ldapadmin,dc=hortonworks,dc=com' -w 'hadoop123' -b 'dc=hortonworks,dc=com'
 ```

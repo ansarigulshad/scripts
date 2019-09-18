@@ -24,7 +24,7 @@ LOC=`pwd`
 OPENLDAP_PROPETIES=openldap.properties
 source $LOC/$OPENLDAP_PROPETIES
 
-mkdir groupmembers
+# mkdir groupmembers
 
 #for thisgroup in `cat groups.list`
 #do

@@ -13,11 +13,31 @@ chmod +x *.sh
 ```
 # cat openldap.properties
 
-LdapAdmin=ldapadmin
-LdapAdminPassword="hadoop123"
-MyPass=`slappasswd -s $LdapAdminPassword`
-BaseDomain="dc=hortonworks,dc=com"
-LdapAdminDN="cn=$LdapAdmin,$BaseDomain"
+ARG_L_ADMIN=ldapadmin
+ARG_L_ADMINPASSWORD="hadoop123"
+ARG_MyPass=`slappasswd -s $ARG_L_ADMINPASSWORD`
+ARG_DOMAIN=HORTONWORKS.COM
+ARG_DOMAINCONTROLLER="DC=HORTONWORKS,DC=COM"
+ARG_BINDDN="CN=$ARG_L_ADMIN,$ARG_DOMAINCONTROLLER"
+
+
+ARG_LDAPURI="ldap://$(hostname -f):389"
+ARG_SEARCHBASE=$ARG_DOMAINCONTROLLER
+#ARG_BINDDN=CN=Administrator,CN=Users,DC=HORTONWORKS,DC=COM
+#ARG_USERPSWD=Hadoop123!
+
+# Users will be created under this(ARG_USER_BASE) OU, Make sure the OU path is correct
+ARG_USER_BASE=OU=Users,OU=Hadoop,$ARG_DOMAINCONTROLLER
+# Groups will be created under this(ARG_GROUP_BASE) OU, Make sure the OU path is correct
+ARG_GROUP_BASE=OU=Groups,OU=Hadoop,$ARG_DOMAINCONTROLLER
+
+# Default password for all users
+ARG_UserPass=Welcome123
+ARG_NewUserPass=`echo -e "${ARG_UserPass}" | iconv -f UTF8 -t UTF16LE | base64 -w 0`
+
+
+LDAP_HOST=$(echo $ARG_LDAPURI | cut -d ":" -f2 | cut -d "/" -f3)
+LDAP_PORT=$(echo $ARG_LDAPURI | cut -d ":" -f3)
 ```
 
 #### 3. Execute _`setup_openldap_server.sh`_ script

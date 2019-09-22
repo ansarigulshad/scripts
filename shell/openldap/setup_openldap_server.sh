@@ -14,8 +14,11 @@ yum clean all -y
 yum -y install openldap-servers openldap-clients
 cp /usr/share/openldap-servers/DB_CONFIG.example /var/lib/ldap/DB_CONFIG
 chown ldap. /var/lib/ldap/DB_CONFIG
-systemctl start slapd
-systemctl enable slapd
+
+service slapd start
+chkconfig slapd on
+# systemctl start slapd
+# systemctl enable slapd
 
 
 LOC=`pwd`

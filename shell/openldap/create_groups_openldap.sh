@@ -1,4 +1,4 @@
-#!/bin/#!/usr/bin/env bash
+#!/usr/bin/env bash
 
 #################################################################
 # Script to Add groups in openldap Directory                   ##

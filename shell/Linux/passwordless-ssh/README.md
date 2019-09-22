@@ -25,3 +25,9 @@ su - <yourUsername>
 $ echo -e "<yourPassword>\n<<yourPassword>>" | sudo passwd <yourUsername>
 ```
 
+### Step 3: Update username & password in `setup_passwordless-ssh.sh` file
+
+### Step 4: Execute `setup_passwordless-ssh.sh`
+```
+sh setup_passwordless-ssh.sh
+```

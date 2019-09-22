@@ -3,6 +3,7 @@
 
 #### 1. Download script
 ```
+yum clean all
 yum install git -y
 git clone https://github.com/ansarigulshad/scripts.git
 cd scripts/shell/openldap/

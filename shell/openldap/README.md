@@ -1,6 +1,8 @@
 
 ### Setup openLDAP server
 
+##### __Note: This setup is tested on Centos7 version only
+
 #### 1. Download script
 ```
 yum clean all

@@ -34,7 +34,8 @@ for (( i=1; i<=$number_of_records; i++ ))
 do
   randCity=$[$RANDOM % ${#myCity[@]}]
   randSal=$[$RANDOM % ${#userSal[@]}]
-  echo $i",user"$i","${userSal[$randSal]}","${myCity[$randCity]}",91905012540"$i
+#  echo $i",user"$i","${userSal[$randSal]}","${myCity[$randCity]}",91905012540"$i
+  echo -e "$i,user$i,${userSal[$randSal]},${myCity[$randCity]},91902$RANDOM$i"
 done > $sample_data_file
 
 echo -e "\n\n$sample_data_file file is ready."

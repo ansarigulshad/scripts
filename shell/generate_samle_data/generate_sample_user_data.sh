@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 sample_data_file=sample_user_data.csv
-number_of_records=100
+number_of_records=5000
 
 myCity[0]="Delhi"
 myCity[1]="Pune"
@@ -16,25 +16,27 @@ myCity[9]="Srinagar"
 myCity[10]="Ahemadabad"
 myCity[11]="Hydrabad"
 
-userSal[0]=1000000
-userSal[1]=2000000
-userSal[2]=3000000
-userSal[3]=4000000
-userSal[4]=5000000
-userSal[5]=6000000
-userSal[6]=7000000
-userSal[7]=8000000
-userSal[8]=9000000
-userSal[9]=10000000
-userSal[10]=12000000
+userSal[0]="1000000"
+userSal[1]="2000000"
+userSal[2]="3000000"
+userSal[3]="4000000"
+userSal[4]="5000000"
+userSal[5]="6000000"
+userSal[6]="7000000"
+userSal[7]="8000000"
+userSal[8]="9000000"
+userSal[9]="15000000"
+userSal[10]="1200000"
 
 echo "Sample data is being generated!!!"
 
 for (( i=1; i<=$number_of_records; i++ ))
 do
   randCity=$[$RANDOM % ${#myCity[@]}]
-  randSal=$[$RANDOM % ${#myCity[@]}]
+  randSal=$[$RANDOM % ${#userSal[@]}]
   echo $i",user"$i","${userSal[$randSal]}","${myCity[$randCity]}",91905012540"$i
 done > $sample_data_file
 
 echo -e "\n\n$sample_data_file file is ready."
+
+#End of script

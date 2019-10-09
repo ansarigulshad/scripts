@@ -91,17 +91,22 @@ ldapadd -x -D $ARG_BINDDN -w $ARG_L_ADMINPASSWORD -f /var/tmp/ARG_DOMAINCONTROLL
 echo -e "\n\nSetup Completed Successfully:\n"
 
 echo -e "=================="
-echo -e "LDAP Attributes"
-echo -e "=================="
+echo -e "LDAP Attributes"     > $LOC/myldapserverdetails.out
+echo -e "==================" >> $LOC/myldapserverdetails.out
 
-echo -e "LDAP Server Host = $LDAP_HOST"
-echo -e "LDAP Server port = $LDAP_PORT"
-echo -e "User Object Class = posixAccount"
-echo -e "Username Attribute = uid"
-echo -e "Group Object Class = posixGroup"
-echo -e "Group Name Attribute = cn"
-echo -e "Group Member Attribute = memberUid"
-echo -e "Distinguished name attribute = dn"
-echo -e "Search Base DN = $ARG_DOMAINCONTROLLER"
-echo -e "managerDn = $ARG_BINDDN"
-echo -e "managerDnPassword = $ARG_L_ADMINPASSWORD"
+echo -e "LDAP Server Host = $LDAP_HOST" >> $LOC/myldapserverdetails.out
+echo -e "LDAP Server port = $LDAP_PORT" >> $LOC/myldapserverdetails.out
+echo -e "User Object Class = posixAccount" >> $LOC/myldapserverdetails.out
+echo -e "Username Attribute = uid"  >> $LOC/myldapserverdetails.out
+echo -e "Group Object Class = posixGroup" >> $LOC/myldapserverdetails.out
+echo -e "Group Name Attribute = cn"  >> $LOC/myldapserverdetails.out
+echo -e "Group Member Attribute = memberUid"  >> $LOC/myldapserverdetails.out
+echo -e "Distinguished name attribute = dn"  >> $LOC/myldapserverdetails.out
+echo -e "Search Base DN = $ARG_DOMAINCONTROLLER"  >> $LOC/myldapserverdetails.out
+echo -e "managerDn = $ARG_BINDDN"  >> $LOC/myldapserverdetails.out
+echo -e "managerDnPassword = $ARG_L_ADMINPASSWORD"  >> $LOC/myldapserverdetails.out
+
+cat $LOC/myldapserverdetails.out
+
+
+#EndOfScript

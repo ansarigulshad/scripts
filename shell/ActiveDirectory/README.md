@@ -10,7 +10,15 @@
 # chmod +x *.sh
 ```
 ## 2. Update ad.properties file as per your AD environment details
+```
+cat ad.properties
 
+# replace EXAMPLE.COM with your AD DOMAIN
+# sed -i.bkp 's/EXAMPLE/ADDOMAIN/g' ad.properties
+
+# Replace ldap server hostname with your ad server hostname
+# sed -i 's/adserver.hortonworks.com/new.adserver.fqdn/g' ad.properties
+```
 
 ## 3. Add users
 ####  3.1. Add users in users.list file
@@ -29,7 +37,7 @@ $ ./addGroups.sh
 #### This is 2 part script
 #### 5.1. Create ldif files for each group membership
 ```
-$ ./addUsersToGroup-Part1-CreateGroupMembershipfiles.sh
+$ ./addUsersToGroups-Part-I-CreateGroupMembershipfiles.sh
 ```
 _This script will create groupmembershif ldif file under `groupmembers` directory_
 _kindly add appropriate members in each ldif file before executing Part-II script_

@@ -24,9 +24,9 @@ currect_time_stamp()
 create_ad_users()
 {
 UNAME="$1"
-uidCounter=$((uidCounter+1))     # doen't work as expected
+uidCounter="$2"
 #FIRSTNAME="$1"
-# LASTNAME="$2"
+#LASTNAME="$2"
 
 # Create User LDIF File
 cat > /tmp/$UNAME.ldif <<EOFILE
@@ -64,9 +64,10 @@ ldappasswd -s "${ARG_UserPass}" -D "${ARG_BINDDN}" -x "uid=$UNAME,${ARG_USER_BAS
 while read LINE
 do
         echo "Creating user: " $LINE
-        create_ad_users $LINE | tee -a addusers.out
+        create_ad_users $LINE $uidCounter | tee -a addusers.out
         if [ $? -eq 0 ]; then
                 echo "User" $LINE "Added Successfully"
+		uidCounter=$((uidCounter+1))
 	else
 		echo "Could not add User" $LINE "..."
         fi

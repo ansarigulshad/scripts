@@ -3,7 +3,7 @@
 #################################################################
 # Script to setup openLDAP server on centos/RHEL server        ##
 # Script will take inputs from users.list file                 ##
-# Users wil be added under OU specied in ad.properties file    ##
+# Users wil be added under OU specied in openldap.properties file    ##
 #                                                     	       ##
 #Author - Gulshad Ansari		                       ##
 #Email: gulshad.ansari@hotmail.com                     	       ##

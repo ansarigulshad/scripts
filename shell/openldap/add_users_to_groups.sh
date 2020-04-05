@@ -30,6 +30,19 @@ source $LOC/$OPENLDAP_PROPETIES
 #do
 #cat > groupmembers/$thisgroup"-members".ldif <<EOFILE
 
+### Create ldif file for public group
+cat > $LOC/add_user_to_public_group.ldif <<EOFILE
+dn: CN=public,${ARG_GROUP_BASE}
+changetype: modify
+add: memberuid
+EOFILE
+
+while read LINE
+do
+	echo "memberuid: $LINE" >> $LOC/add_user_to_public_group.ldif
+done < $LOC/users.list
+
+### Create ldif file for all other groups
 cat > $LOC/add_user_to_group.ldif <<EOFILE
 dn: CN=hd-admins,${ARG_GROUP_BASE}
 changetype: modify
@@ -89,6 +102,8 @@ EOFILE
 #done
 
 
+ldapmodify -x -D "${ARG_BINDDN}" -w "${ARG_L_ADMINPASSWORD}" -f $LOC/add_user_to_public_group.ldif
 ldapmodify -x -D "${ARG_BINDDN}" -w "${ARG_L_ADMINPASSWORD}" -f $LOC/add_user_to_group.ldif
+
 
 # End of script

@@ -15,7 +15,7 @@ chkconfig sssd on
 
 LOC=`pwd`
 OPENLDAP_PROPETIES=openldap.properties
-source $LOC/$OPENLDAP_PROPETIES
+source $LOC/../openldap.properties
 
 #---- create sssd.conf file
 cat > /etc/sssd/sssd.conf <<EOFILE

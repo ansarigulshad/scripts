@@ -25,7 +25,7 @@ currect_time_stamp()
 create_ad_groups()
 {
 GROUPNAME="$1"
-gidCounter=$((gidCounter+1))   #not working as expected
+gidCounter="$2"
 
 # Create Group LDIF File
 cat > /tmp/$GROUPNAME.ldif <<EOFILE
@@ -45,9 +45,10 @@ LDAPTLS_REQCERT=never ldapadd -x -H "${ARG_LDAPURI}" -a -D "${ARG_BINDDN}" -f /t
 while read LINE
 do
         echo "Creating Groups: " $LINE
-        create_ad_groups $LINE | tee -a addgroups.out
+        create_ad_groups $LINE $gidCounter | tee -a addgroups.out
         if [ $? -eq 0 ]; then
                 echo "Group" $LINE "Added Successfully"
+		gidCounter=$((gidCounter+1))
 	else
 		echo "Could not add Group " $LINE "..."
         fi

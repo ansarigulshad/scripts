@@ -1,10 +1,12 @@
 #!/bin/bash
-# Script to delete historical data from ambari database
+# Script to delete historical data from ambari database (30 days by default, modify _DATA_TO_BE_PURGED to change the value)
+# Refer official document for more details : https://docs.cloudera.com/HDPDocuments/Ambari-2.7.5.0/administering-ambari/content/amb_purge_ambari_server_database_history.html
 
 
 yum clean all
 yum install jq -y
 
+# Set Variables
 _AMBARI_HOST=$(hostname -f)
 _AMBARI_PORT="8080"
 _AMBARI_PROTOCOL=http

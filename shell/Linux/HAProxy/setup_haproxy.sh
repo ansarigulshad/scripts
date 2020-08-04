@@ -1,7 +1,7 @@
 #!/bin/bash
 
-_SERVICE_URL1=https://172.25.38.64:8443
-_SERVICE_URL2=https://172.25.38.64:8443
+_SERVICE_URL1=http://172.25.38.64:30800
+_SERVICE_URL2=http://172.25.60.40:30800
 
 cd /usr/local
 wget https://archive.apache.org/dist/httpd/httpd-2.4.16.tar.gz

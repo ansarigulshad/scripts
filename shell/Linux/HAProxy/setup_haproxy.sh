@@ -78,7 +78,7 @@ cat > /usr/local/apache2/conf/my-service.conf <<EOFILE
 
         Header add Set-Cookie "ROUTEID=.%{BALANCER_WORKER_ROUTE}e; path=/" env=BALANCER_ROUTE_CHANGED
 
-        <Proxy balancer://knoxcluster>
+        <Proxy balancer://mycluster>
                 BalancerMember $_SERVICE_URL1 loadfactor=1 route=1
                 BalancerMember $_SERVICE_URL2 loadfactor=1 route=2
 

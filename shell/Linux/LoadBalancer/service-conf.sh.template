@@ -1,4 +1,6 @@
 
+_SERVICE_URL1=http://172.25.38.64:30800
+_SERVICE_URL2=http://172.25.60.40:30800
 
 echo "Include conf/my-service.conf" >> httpd.conf
 

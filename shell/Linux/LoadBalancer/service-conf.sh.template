@@ -45,7 +45,7 @@ cat > /usr/local/apache2/conf/my-service.conf <<EOFILE
                 Allow from all
         </Location>
 
-
+#       RequestHeader set X-Forwarded-Proto https
        ProxyPass /balancer-manager !
        ProxyPass / balancer://mycluster/
        ProxyPassReverse / balancer://mycluster/

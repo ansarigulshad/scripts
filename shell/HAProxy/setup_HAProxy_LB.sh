@@ -20,6 +20,8 @@ LOC=`pwd`
 # _SVC_PROPERTIES=service.properties
 # source $LOC/$_SVC_PROPERTIES
 
+_CERTIFICATE_SUBJECTDETAILS="/C=US/ST=North Carolina/L=Raleigh/O=Cloudera/OU=Support/CN=$(hostname -f)"
+
 _SERVER_1_HOSTNAME="c3230-node1.coelab.cloudera.com"
 _SERVER_1_PORT=8443
 _SERVER_2_HOSTNAME="c3230-node2.coelab.cloudera.com"
@@ -41,7 +43,7 @@ start_ha_proxy_service() {
 
 generate_ssl_certificates() {
     openssl genrsa -out /etc/haproxy/haproxy.key 2048
-    openssl req -new -key /etc/haproxy/haproxy.key -out /etc/haproxy/haproxy.csr -subj "/C=US/ST=North Carolina/L=Raleigh/O=Cloudera/OU=Support/CN=$(hostname -f)"
+    openssl req -new -key /etc/haproxy/haproxy.key -out /etc/haproxy/haproxy.csr -subj "$_CERTIFICATE_SUBJECTDETAILS"
     openssl x509 -req -days 365 -in /etc/haproxy/haproxy.csr -signkey /etc/haproxy/haproxy.key -out /etc/haproxy/haproxy.crt
     cat /etc/haproxy/haproxy.key /etc/haproxy/haproxy.crt > /etc/haproxy/haproxy.pem
 }
@@ -137,6 +139,7 @@ backend app-main
 EOFILE
 }
 
+# Action start here
 install_required_Packages | tee -a $LOC/haproxy-setup.log
 generate_ssl_certificates | tee -a $LOC/haproxy-setup.log
 backup_ha_proxy_cfg_file | tee -a $LOC/haproxy-setup.log
@@ -147,6 +150,7 @@ if [ "$?" == "0" ]; then
     echo -e 'HAProxy setup had been completed Successfully!!!'
     exit 0;
 fi
+
 #End of Script
 
 

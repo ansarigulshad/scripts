@@ -32,7 +32,7 @@ setup_kdc()
 	sed -i.bkp "s/EXAMPLE.COM/$REALM/g" /var/kerberos/krb5kdc/kdc.conf
 	#add renewabale life
 	sed -i '/{/a max_renewable_life = 7d 0h 0m 0s'  /var/kerberos/krb5kdc/kdc.conf
-	sed -i '/{/a default_principal_flags = +preauth'  /var/kerberos/krb5kdc/kdc.conf
+	#sed -i '/{/a default_principal_flags = +preauth'  /var/kerberos/krb5kdc/kdc.conf
 	echo -e "\n`currect_time_stamp` Configuring kadm5.acl"
 	sed -i.bkp "s/EXAMPLE.COM/$REALM/g" /var/kerberos/krb5kdc/kadm5.acl
 

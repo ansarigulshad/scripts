@@ -31,6 +31,7 @@ ambari-server start
 echo "========INSTALL & SETUP AMBARI-AGENT========================"
 yum install ambari-agent -y
 ambari-agent reset $(hostname -f)
+sed -i '/security/a force_https_protocol=PROTOCOL_TLSv1_2'  /etc/ambari-agent/conf/ambari-agent.ini
 ambari-agent start
 
 curl -u admin:admin http://$(hostname -f):8080/api/v1/hosts
@@ -108,7 +109,7 @@ EOF
 
 curl -u admin:admin -i -H 'X-Requested-By: ambari' -X POST -d @/var/tmp/cluster_configuration.json http://$(hostname -f):8080/api/v1/blueprints/single-node-hwx-cluster
 
-curl -H "X-Requested-By: ambari" -X POST -u admin:admin http://$(hostname -f):8080/api/v1/clusters/clustername -d @/var/tmp/hostmapping.json
+curl -H "X-Requested-By: ambari" -X POST -u admin:admin http://$(hostname -f):8080/api/v1/clusters/hdpcdp -d @/var/tmp/hostmapping.json
 
 echo "Login to Ambari UI and check the progress : http://<ambarihostname>:8080"
 

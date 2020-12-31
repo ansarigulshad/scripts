@@ -31,8 +31,7 @@ openssl x509 -req \
 -CA /etc/pki/CA/certs/ca.crt \
 -CAkey /etc/pki/CA/private/ca.key \
 -in /var/tmp/SSL/$_CN.csr \
--out /var/tmp/SSL/$_CN.crt \
--extfile <(printf "subjectAltName=$_SAN")
+-out /var/tmp/SSL/$_CN.crt -extfile <(printf "subjectAltName=$_SAN")
 
 # openssl x509 -noout -text -in /var/tmp/SSL/$_CN.crt | less
 

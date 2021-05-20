@@ -23,7 +23,7 @@
 # if ! sudo dpkg-query -W -f='${Status}' jq  | grep "ok installed"; then sudo apt install jq; fi
 
 # RHEL
-rpm -qa | grep -qw jq || yum install jq -y
+sudo rpm -qa | grep -qw jq || sudo yum install jq -y
 
 # Set variables
 _ambari_admin_user=admin

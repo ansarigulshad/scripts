@@ -35,7 +35,7 @@ _ambari_api="${_ambari_protocol}://${_ambari_hostname}:${_ambari_port}/api/v1"
 #_cluster_name=hdp_cluster
 _cluster_name=`curl -k -H 'X-Requested-By: ambari' -u ${_ambari_admin_user}:${_ambari_admin_password} ${_ambari_api}/clusters | jq -r '.items[].Clusters.cluster_name'`
 
-_unused_service_list=`curl -k -H 'X-Requested-By: ambari' -u ${_ambari_admin_user}:${_ambari_admin_password}  "${_ambari_api}/clusters/${_cluster_name}/services" | jq -r '.items[].ServiceInfo.service_name'
+_unused_service_list=`curl -k -H 'X-Requested-By: ambari' -u ${_ambari_admin_user}:${_ambari_admin_password}  "${_ambari_api}/clusters/${_cluster_name}/services" | jq -r '.items[].ServiceInfo.service_name'`
 
 
 for myservice in $_unused_service_list
@@ -43,9 +43,9 @@ do
 # if condition for zookeeper as ZK command is different than other services
 if [ $myservice == 'ZOOKEEPER' ]
 then
-  MY_COMMAND=`echo $myservice"_QUORUM_SERVICE_CHECK"`
+  MY_COMMAND=""$myservice"_QUORUM_SERVICE_CHECK"
 else
-  MY_COMMAND=`echo $myservice"_SERVICE_CHECK"`
+  MY_COMMAND=""$myservice"_SERVICE_CHECK"
 fi
 # create payload for each service
 cat > /var/tmp/$myservice-payload.json <<EOF

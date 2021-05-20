@@ -18,19 +18,27 @@
 #
 #
 #
+# Install jq package if it doesnt exist
+# Ubuntu
+# if ! sudo dpkg-query -W -f='${Status}' jq  | grep "ok installed"; then sudo apt install jq; fi
+
+# RHEL
+rpm -qa | grep -qw jq || yum install jq -y
 
 # Set variables
 _ambari_admin_user=admin
 _ambari_admin_password=gansari
-_clustername=c1230
-_ambari_hostname=c1230-node1.coelab.cloudera.com
+_ambari_hostname=$(hostname -f)
 _ambari_port=8080
 _ambari_protocol=http
+_ambari_api="${_ambari_protocol}://${_ambari_hostname}:${_ambari_port}/api/v1"
+#_cluster_name=hdp_cluster
+_cluster_name=`curl -k -H 'X-Requested-By: ambari' -u ${_ambari_admin_user}:${_ambari_admin_password} ${_ambari_api}/clusters | jq -r '.items[].Clusters.cluster_name'`
 
-# Install jq
-yum install jq -y
+_unused_service_list=`curl -k -H 'X-Requested-By: ambari' -u ${_ambari_admin_user}:${_ambari_admin_password}  "${_ambari_api}/clusters/${_cluster_name}/services" | jq -r '.items[].ServiceInfo.service_name'
 
-for myservice in `cat /var/tmp/hdp_services.list`
+
+for myservice in $_unused_service_list
 do
 # if condition for zookeeper as ZK command is different than other services
 if [ $myservice == 'ZOOKEEPER' ]
@@ -54,8 +62,7 @@ cat > /var/tmp/$myservice-payload.json <<EOF
 }
 EOF
 # run service check for all services
-curl -k -u $_ambari_admin_user:$_ambari_admin_password -H 'X-Requested-By: ambari' "$_ambari_protocol://$_ambari_hostname:$_ambari_port/api/v1/clusters/$_clustername/requests" \
--d @/var/tmp/$myservice-payload.json
+curl -k -u ${_ambari_admin_user}:${_ambari_admin_password} -H 'X-Requested-By: ambari' "${_ambari_api}/${_cluster_name}/requests" -d @/var/tmp/$myservice-payload.json
 done
 
 

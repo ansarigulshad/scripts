@@ -62,7 +62,8 @@ cat > /var/tmp/$myservice-payload.json <<EOF
 }
 EOF
 # run service check for all services
-curl -k -u ${_ambari_admin_user}:${_ambari_admin_password} -H 'X-Requested-By: ambari' "${_ambari_api}/${_cluster_name}/requests" -d @/var/tmp/$myservice-payload.json
+echo "============ Trigerred service check for ${myservice} ============"
+curl -k -u ${_ambari_admin_user}:${_ambari_admin_password} -H 'X-Requested-By: ambari' "${_ambari_api}/clusters/${_cluster_name}/requests" -d @/var/tmp/$myservice-payload.json
 done
 
 

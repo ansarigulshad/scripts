@@ -27,7 +27,7 @@ sudo rpm -qa | grep -qw jq || sudo yum install jq -y
 
 # Set variables
 _ambari_admin_user=admin
-_ambari_admin_password=gansari
+_ambari_admin_password=admin
 _ambari_hostname=$(hostname -f)
 _ambari_port=8080
 _ambari_protocol=http

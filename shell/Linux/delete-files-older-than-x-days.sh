@@ -12,4 +12,7 @@ find /hadoop/nifi-logs-archive/ -mtime +10 -exec rm {} \;
 
 
 
+# Set Cron to run daily at 1AM
+# crontab -e
+# 0 1 * * * /path/to/script
 
